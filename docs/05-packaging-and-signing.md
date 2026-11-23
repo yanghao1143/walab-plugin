@@ -311,7 +311,7 @@ tar -czf example-signed.paasplugin plugin-manifest.json plugin.wasm signature.js
 
 ### 5.5 签名之后会看到什么
 
-平台开放作者注册和公钥登记**之前**，带签名的包上传后 `signature.state` 会是 `present_unverified`——意思只是"检测到了格式正确的签名，但还没法验证它可信"，不是签名错了，也不是被处罚。开放之后：签名对得上登记公钥的包会显示 `verified`；对不上会给出具体原因（比如 `signing_key_unknown`、`signature_invalid`）。这些状态值的含义见[发布与安装](06-publish-and-install.md)。
+平台开放作者注册和公钥登记**之前**，带签名的包上传后 `signature.state` 会是 `present_unverified`——意思只是"检测到了格式正确的签名，但还没法验证它可信"，不是签名错了，也不是被处罚。开放之后：签名对得上登记公钥的包会显示 `verified`；对不上会显示 `present_unverified` 并附一个机器可读原因（比如 `signing_key_unknown`、`signature_invalid`、`signing_key_expired`）。三个状态和全部原因的对照见[发布与安装](06-publish-and-install.md) 第 5 节。
 
 ## 6. 上传前自查清单
 

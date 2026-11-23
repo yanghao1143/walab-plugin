@@ -87,6 +87,19 @@ curl.exe -X POST "https://developer.walab.ai/api-gateway/plugin-registry/v1/mark
 | `present_unverified` | 有格式正确的签名，但平台还没有可验证的作者公钥 | 正常现象。作者注册/公钥登记开放前，所有签名都是这个状态 |
 | `verified` | 签名与平台登记的作者公钥对上了 | 作者体系上线后才会出现 |
 
+`verified` 之外，带签名的包还可能给出 `present_unverified` 加一个机器可读原因 `signature.reason`，逐条对照：
+
+| `signature.reason` | 含义 | 你要做什么 |
+|---|---|---|
+| `signing_key_unknown` | 你企业的名下查不到这把 `key_id` 对应的已登记公钥 | 公钥登记开放后先登记；没登记过的签名一律是这个原因 |
+| `signing_key_author_unbound` | 清单里没有写 `vendor_id`，签名不知道该对哪个作者 | 在清单里补 `vendor_id`（你的作者身份），重新打包签名 |
+| `signing_key_inactive` | 这把公钥已登记但已被停用 | 换一把有效的 `key_id` 重新签名，或联系平台恢复 |
+| `signing_key_not_yet_valid` | 公钥还没到生效时间（`valid_from` 在未来） | 等到生效时间，或登记一把当前已生效的 key |
+| `signing_key_expired` | 公钥已过有效期（`valid_until` 已过） | 登记新 key 重新签名；过期公钥不会再判 verified |
+| `signing_key_window_invalid` | 登记的有效期数据本身不合法 | 联系平台核对这条公钥登记记录 |
+| `signature_invalid` | 找到了可信公钥，但包的字节和签名对不上 | **视为被改动**：用定稿后的原包重新签名打包，别直接重传改过的包 |
+| `author_key_projection_unavailable` | 平台的作者公钥读取暂不可用 | 不是包的问题，稍等重试；持续出现就带 `request_id` 找平台 |
+
 这三个值**都不能**说明"插件已安装/已可运行"。安装与运行是后续版本的能力。也不要用无签名包冒充可信包：`vendor_id` 只是包内署名，不转移所有权，发布者永远是上传它的企业。
 
 ## 6. 出错怎么办：逐条自查表
