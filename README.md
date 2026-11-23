@@ -15,9 +15,10 @@
 | [docs/04-platform-capabilities.md](docs/04-platform-capabilities.md) | 怎么用平台能力：数据（数据库）、缓存、消息、对象存储、模型调用、身份与租户上下文。插件**不直连**任何中间件，一律经平台网关和数据网关，并按清单里声明的权限放行 |
 | [docs/05-packaging-and-signing.md](docs/05-packaging-and-signing.md) | 打包格式（清单 + wasm + 前端资源）、签名、版本号与兼容范围 |
 | [docs/06-publish-and-install.md](docs/06-publish-and-install.md) | 在 GitHub / Gitee 发版（锁定提交或 Release 资产）；在插件市场按地址安装或拖拽安装；升级、回滚、卸载 |
-| [docs/07-debugging.md](docs/07-debugging.md) | 联调：本地模拟宿主（不连平台也能跑通全部接口）＋ 开发沙箱企业（真实安装、真实调用、看日志） |
-| [docs/08-security-and-review.md](docs/08-security-and-review.md) | 安全模型：租户隔离、权限确认、签名与可信来源、上架审核 |
-| [docs/09-faq.md](docs/09-faq.md) | 常见错误码和排查 |
+| [docs/07-install-requests.md](docs/07-install-requests.md) | 安装请求：从提交到装好（发起、进度、SSE、取消、制品一致性） |
+| [docs/08-debugging.md](docs/08-debugging.md) | 联调：本地模拟宿主（不连平台也能跑通全部接口）＋ 开发沙箱企业（真实安装、真实调用、看日志） |
+| [docs/09-security-and-review.md](docs/09-security-and-review.md) | 安全模型：租户隔离、权限确认、签名与可信来源、上架审核 |
+| [docs/10-faq.md](docs/10-faq.md) | 常见错误码和排查 |
 
 ## 目录结构
 - `docs/`：开发文档
